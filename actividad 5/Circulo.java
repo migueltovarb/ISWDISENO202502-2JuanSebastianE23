@@ -1,4 +1,4 @@
-// ACTIVIDAD 5
+// actividad 5
 import java.util.Scanner;
 
 public class Circulo {
