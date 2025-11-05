@@ -1,4 +1,4 @@
-// actividad 4
+// ACTIVIDAD 4
 import java.util.Scanner;
 
 public class Direccion extends Nombre {

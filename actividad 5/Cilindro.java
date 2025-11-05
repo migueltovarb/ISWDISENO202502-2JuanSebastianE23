@@ -1,4 +1,4 @@
-// actividad 5
+// ACTIVIDAD 5
 import java.util.Scanner;
 
 public class Cilindro extends Circulo {
