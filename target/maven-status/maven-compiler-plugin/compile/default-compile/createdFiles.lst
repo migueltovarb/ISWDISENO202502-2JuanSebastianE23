@@ -1,0 +1,6 @@
+com\example\vehiculos\SpringbootVehiculosApplication.class
+com\example\vehiculos\model\Vehicle.class
+com\example\vehiculos\repository\VehicleRepository.class
+com\example\vehiculos\controller\VehicleController.class
+com\example\vehiculos\ConsoleApp.class
+com\example\vehiculos\service\VehicleService.class
