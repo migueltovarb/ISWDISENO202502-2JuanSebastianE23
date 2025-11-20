@@ -1,35 +1,51 @@
-// actividad 11
 public class EntregablesDemo {
     public static void main(String[] args) {
-        // Crear series
-        Serie serie1 = new Serie("Breaking Bad", 5, "Drama", "Vince Gilligan");
-        Serie serie2 = new Serie("The Office", 9, "Comedia", "Greg Daniels");
+        Serie[] series = new Serie[5];
+        series[0] = new Serie("Breaking Bad", 5, "Drama", "Vince Gilligan");
+        series[1] = new Serie("Game of Thrones", 8, "Fantasía", "George R.R. Martin");
+        series[2] = new Serie("The Office", 9, "Comedia", "Greg Daniels");
+        series[3] = new Serie("Stranger Things", 4, "Ciencia Ficción", "The Duffer Brothers");
+        series[4] = new Serie("The Mandalorian", 2, "Ciencia Ficción", "Jon Favreau");
 
-        // Crear videojuegos
-        Videojuego juego1 = new Videojuego("The Witcher 3", 200, "RPG", "CD Projekt");
-        Videojuego juego2 = new Videojuego("FIFA 2023", 50, "Deportes", "EA Sports");
+        Videojuego[] videojuegos = new Videojuego[5];
+        videojuegos[0] = new Videojuego("The Last of Us", 20, "Aventura", "Naughty Dog");
+        videojuegos[1] = new Videojuego("God of War", 15, "Aventura", "Santa Monica");
+        videojuegos[2] = new Videojuego("Uncharted", 12, "Aventura", "Naughty Dog");
+        videojuegos[3] = new Videojuego("Horizon Zero Dawn", 18, "RPG", "Guerrilla Games");
+        videojuegos[4] = new Videojuego("Spider-Man", 10, "Aventura", "Insomniac Games");
 
-        // Operaciones con series
-        System.out.println("=== SERIES ===");
-        System.out.println("Serie 1: " + serie1);
-        System.out.println("Serie 2: " + serie2);
+        // Entregar algunos
+        series[1].entregar();
+        series[3].entregar();
+        videojuegos[0].entregar();
+        videojuegos[2].entregar();
+        videojuegos[4].entregar();
 
-        serie1.entregar();
-        System.out.println("Serie 1 entregada: " + serie1.isEntregado());
+        // Contar entregados
+        int seriesEntregadas = 0;
+        for (Serie s : series) {
+            if (s.isEntregado()) seriesEntregadas++;
+        }
 
-        serie1.devolver();
-        System.out.println("Serie 1 devuelta: " + serie1.isEntregado());
+        int videojuegosEntregados = 0;
+        for (Videojuego v : videojuegos) {
+            if (v.isEntregado()) videojuegosEntregados++;
+        }
 
-        System.out.println("Comparación series (temporadas): " + serie1.compareTo(serie2));
+        System.out.println("Series entregadas: " + seriesEntregadas);
+        System.out.println("Videojuegos entregados: " + videojuegosEntregados);
 
-        // Operaciones con videojuegos
-        System.out.println("\n=== VIDEOJUEGOS ===");
-        System.out.println("Juego 1: " + juego1);
-        System.out.println("Juego 2: " + juego2);
+        // Encontrar el más largo
+        Serie serieMasLarga = series[0];
+        for (Serie s : series) {
+            if (s.compareTo(serieMasLarga) > 0) serieMasLarga = s;
+        }
+        System.out.println("Serie con más temporadas: " + serieMasLarga.getTitulo());
 
-        juego2.entregar();
-        System.out.println("Juego 2 entregado: " + juego2.isEntregado());
-
-        System.out.println("Comparación juegos (horas): " + juego1.compareTo(juego2));
+        Videojuego videojuegoMasLargo = videojuegos[0];
+        for (Videojuego v : videojuegos) {
+            if (v.compareTo(videojuegoMasLargo) > 0) videojuegoMasLargo = v;
+        }
+        System.out.println("Videojuego con más horas: " + videojuegoMasLargo.getTitulo());
     }
 }
