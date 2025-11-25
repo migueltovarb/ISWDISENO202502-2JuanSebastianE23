@@ -108,33 +108,6 @@ router.delete('/:id', auth, role(['Administrador']), async (req, res) => {
   }
 });
 
-// Add comment (employee only for internal comments)
-router.post('/:id/comments', auth, async (req, res) => {
-  const { text, isInternal } = req.body;
-  try {
-    const claim = await Claim.findById(req.params.id);
-    if (!claim) return res.status(404).json({ msg: 'Reclamo no encontrado' });
-
-    // Only assigned employee or admin can add comments
-    if (req.user.role !== 'Administrador' && claim.assignedTo?.toString() !== req.user.id) {
-      return res.status(403).json({ msg: 'No autorizado' });
-    }
-
-    const comment = {
-      user: req.user.id,
-      text,
-      isInternal: isInternal || false
-    };
-
-    claim.comments.push(comment);
-    await claim.save();
-
-    res.json(claim);
-  } catch (err) {
-    res.status(500).send('Error del servidor');
-  }
-});
-
 // Add comment to claim
 router.post('/:id/comments', auth, async (req, res) => {
   const { text, isInternal } = req.body;
@@ -145,11 +118,11 @@ router.post('/:id/comments', auth, async (req, res) => {
     }
 
     // Check permissions
-    if (req.user.role === 'Cliente' && claim.user.toString() !== req.user.id) {
+    if (req.user.role === 'Cliente' && (!claim.user || claim.user._id.toString() !== req.user.id)) {
       return res.status(403).json({ msg: 'Access denied' });
     }
 
-    if (req.user.role === 'Empleado' && claim.assignedTo?.toString() !== req.user.id) {
+    if (req.user.role === 'Empleado' && (!claim.assignedTo || claim.assignedTo._id.toString() !== req.user.id)) {
       return res.status(403).json({ msg: 'Access denied' });
     }
 
